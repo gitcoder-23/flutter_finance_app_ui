@@ -1,4 +1,4 @@
-# flutter_finance_app_ui
+# Financex
 
 A new Flutter project.
 

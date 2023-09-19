@@ -1,4 +1,4 @@
-package com.example.flutter_finance_app_ui
+package com.techsoft.financex
 
 import io.flutter.embedding.android.FlutterActivity
 
