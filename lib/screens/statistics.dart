@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_finance_app_ui/widgets/chart.dart';
 
 class Statistics extends StatefulWidget {
   const Statistics({super.key});
@@ -107,10 +108,34 @@ class _StatisticsState extends State<Statistics> {
                       ),
                     ],
                   ),
+                ),
+                const SizedBox(height: 20),
+                const Chart(),
+                const SizedBox(height: 20),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Top Spending',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Icon(
+                        Icons.swap_vert,
+                        size: 25,
+                        color: Colors.grey,
+                      )
+                    ],
+                  ),
                 )
               ],
             ),
-          )
+          ),
         ],
       )),
     );
