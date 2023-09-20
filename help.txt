@@ -1,7 +1,7 @@
 // You tut
 https://youtu.be/9-QFt-cWZV8?si=1VakebOeq_K_FfPd
 
-vid: 52:14
+vid: 1: 08: 17
 
 com.example.flutter_finance_app_ui
 

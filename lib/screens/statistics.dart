@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_finance_app_ui/data/top.dart';
 import 'package:flutter_finance_app_ui/widgets/chart.dart';
 
 class Statistics extends StatefulWidget {
@@ -134,6 +135,40 @@ class _StatisticsState extends State<Statistics> {
                   ),
                 )
               ],
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                return ListTile(
+                  leading: Image.asset(
+                    'images/${geter_top()[index].image}',
+                    height: 40,
+                  ),
+                  title: Text(
+                    geter_top()[index].name!,
+                    style: const TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  subtitle: Text(
+                    geter_top()[index].time!,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  trailing: Text(
+                    geter_top()[index].fee!,
+                    style: const TextStyle(
+                      color: Colors.red,
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                );
+              },
+              childCount: geter_top().length,
             ),
           ),
         ],
