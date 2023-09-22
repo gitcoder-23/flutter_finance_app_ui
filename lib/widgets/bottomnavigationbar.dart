@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_finance_app_ui/screens/addscreen.dart';
 import 'package:flutter_finance_app_ui/screens/home.dart';
 import 'package:flutter_finance_app_ui/screens/statistics.dart';
 
@@ -23,7 +24,10 @@ class _BottomNavBarState extends State<BottomNavBar> {
     return Scaffold(
       body: Screen[index_color],
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => const AddScreen()));
+        },
         backgroundColor: const Color(0xff368983),
         child: const Icon(Icons.add),
       ),
