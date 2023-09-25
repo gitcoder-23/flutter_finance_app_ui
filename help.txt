@@ -6,3 +6,8 @@ vid: 1: 40: 09
 com.example.flutter_finance_app_ui
 
 com.techsoft.financex
+
+
+// after adding hive noSql DB instances
+run => flutter packages pub run build_runner build
+Then auto generate "add_date.g.dart"-- this file

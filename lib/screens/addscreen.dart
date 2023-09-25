@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:flutter_finance_app_ui/data/models/add_data.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class AddScreen extends StatefulWidget {
   const AddScreen({super.key});
@@ -8,6 +11,8 @@ class AddScreen extends StatefulWidget {
 }
 
 class _AddScreenState extends State<AddScreen> {
+  final dataBox = Hive.box<AddData>('data');
+
   String? selectedItem;
   String? selectedItemi;
   DateTime date = DateTime.now();
@@ -39,8 +44,66 @@ class _AddScreenState extends State<AddScreen> {
       setState(() {});
     });
 
+    print('dataBox--> ${dataBox.length}');
     super.initState();
   }
+
+  addDataSave() {
+    if (selectedItem == null) {
+      Fluttertoast.showToast(
+        backgroundColor: Colors.red,
+        msg: "Select any one type of name!",
+      );
+    } else if (expalinText.text.isEmpty) {
+      Fluttertoast.showToast(
+        msg: "Explain required!",
+        backgroundColor: Colors.red,
+      );
+    } else if (expalinText.text.length <= 3) {
+      Fluttertoast.showToast(
+        msg: "Explain min 3 letter required!",
+        backgroundColor: Colors.red,
+      );
+    } else if (amountText.text.isEmpty) {
+      Fluttertoast.showToast(
+        msg: "Amount required!",
+        backgroundColor: Colors.red,
+      );
+    } else if (selectedItemi == null) {
+      Fluttertoast.showToast(
+        msg: "Select how to add!",
+        backgroundColor: Colors.red,
+      );
+    } else {
+      var formData = AddData(
+        selectedItemi!,
+        expalinText.text,
+        date,
+        amountText.text,
+        selectedItem!,
+      );
+      print('formData=> ${formData.amount}.');
+
+      dataBox.add(formData).then((value) => {
+            {Navigator.of(context).pop()}
+          });
+    }
+  }
+
+  // clearTextField() {
+  //   expalinText.clear();
+  //   amountText.clear();
+  //   selectedItem = null;
+  //   selectedItemi = null;
+  //   date = DateTime.now();
+  // }
+
+  // @override
+  // void dispose() {
+  //   expalinText.dispose();
+  //   amountText.dispose();
+  //   super.dispose();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -93,9 +156,7 @@ class _AddScreenState extends State<AddScreen> {
 
   GestureDetector saveButton() {
     return GestureDetector(
-      onTap: () {
-        Navigator.of(context).pop();
-      },
+      onTap: () => addDataSave(),
       child: Container(
         alignment: Alignment.center,
         decoration: BoxDecoration(
