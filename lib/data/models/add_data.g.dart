@@ -17,11 +17,11 @@ class AddDataAdapter extends TypeAdapter<AddData> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return AddData(
-      fields[3] as String,
-      fields[2] as String,
-      fields[4] as DateTime,
-      fields[1] as String,
       fields[0] as String,
+      fields[1] as String,
+      fields[2] as String,
+      fields[3] as String,
+      fields[4] as DateTime,
     );
   }
 

@@ -23,7 +23,7 @@ class _AddScreenState extends State<AddScreen> {
   FocusNode amountFocus = FocusNode();
 
   final List<String> item = [
-    'food',
+    'Food',
     "Transfer",
     "Transportation",
     "Education",
@@ -75,12 +75,13 @@ class _AddScreenState extends State<AddScreen> {
         backgroundColor: Colors.red,
       );
     } else {
+      // Arrange according to the DB NAME
       var formData = AddData(
-        selectedItemi!,
-        expalinText.text,
-        date,
-        amountText.text,
         selectedItem!,
+        expalinText.text,
+        amountText.text,
+        selectedItemi!,
+        date,
       );
       print('formData=> ${formData.amount}.');
 

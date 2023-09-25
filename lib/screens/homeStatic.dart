@@ -2,144 +2,54 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_finance_app_ui/data/listdata.dart';
-import 'package:flutter_finance_app_ui/data/models/add_data.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 
-class Home extends StatefulWidget {
-  const Home({super.key});
-
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-// To get dynamic DB Hive Data
-  var historyBox;
-  final hiveBoxData = Hive.box<AddData>('data');
-  final List<String> dayList = [
-    'Monday',
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    'friday',
-    'saturday',
-    'sunday'
-  ];
+class HomeStatic extends StatelessWidget {
+  const HomeStatic({super.key});
 
   @override
   Widget build(BuildContext context) {
-    print('hiveBoxData-l=> ${hiveBoxData.length}');
     return Scaffold(
       body: SafeArea(
-        child: ValueListenableBuilder(
-          valueListenable: hiveBoxData.listenable(),
-          builder: (context, value, child) {
-            return CustomScrollView(
-              slivers: [
-                SliverToBoxAdapter(
-                  child: SizedBox(height: 340, child: buildHeader()),
-                ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          hiveBoxData.isEmpty
-                              ? 'Static Tranasaction History'
-                              : 'Live Tranasaction History',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 19,
-                            color: Colors.black,
-                          ),
-                        ),
-                        const Text(
-                          'See all',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
-                            color: Colors.grey,
-                          ),
-                        ),
-                      ],
+        child: CustomScrollView(
+          slivers: [
+            SliverToBoxAdapter(
+              child: SizedBox(height: 340, child: buildHeader()),
+            ),
+            const SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Tranasaction History',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 19,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
+                    Text(
+                      'See all',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 15,
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
                 ),
-                SliverList(
-                  delegate: hiveBoxData.isEmpty
-                      ? SliverChildBuilderDelegate(
-                          (context, index) {
-                            return buildStaticSliverList(index);
-                          },
-                          childCount: geter().length,
-                        )
-                      : SliverChildBuilderDelegate(
-                          (context, index) {
-                            historyBox = hiveBoxData.values.toList()[index];
-                            print('historyBox=> $historyBox');
-                            return getDynamicSliverList(
-                              index,
-                              historyBox,
-                            );
-                          },
-                          childCount: hiveBoxData.length,
-                        ),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  Widget getDynamicSliverList(
-    int index,
-    AddData historyBox,
-  ) {
-    return Dismissible(
-      key: UniqueKey(),
-      onDismissed: (direction) {
-        // delete hive DB Data
-        historyBox.delete();
-      },
-      child: buildDynamicSliverList(index, historyBox),
-    );
-  }
-
-  Widget buildDynamicSliverList(
-    int index,
-    AddData historyBox,
-  ) {
-    return ListTile(
-      leading: ClipRRect(
-        borderRadius: BorderRadius.circular(5),
-        child: Image.asset(
-          'images/${historyBox.name}.png',
-          height: 40,
-        ),
-      ),
-      title: Text(
-        historyBox.name,
-        style: const TextStyle(
-          fontSize: 17,
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      subtitle: Text(
-        '${dayList[historyBox.datetime.weekday - 1]}  ${historyBox.datetime.year}-${historyBox.datetime.day}-${historyBox.datetime.month}',
-        style: const TextStyle(
-          fontWeight: FontWeight.w600,
-        ),
-      ),
-      trailing: Text(
-        '\$ ${historyBox.amount}',
-        style: TextStyle(
-          color: historyBox.IN == "Income" ? Colors.green : Colors.red,
-          fontSize: 19,
-          fontWeight: FontWeight.w600,
+              ),
+            ),
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  return buildStaticSliverList(index);
+                },
+                childCount: geter().length,
+              ),
+            ),
+          ],
         ),
       ),
     );

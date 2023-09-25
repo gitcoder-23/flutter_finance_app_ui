@@ -15,10 +15,10 @@ class AddData extends HiveObject {
   @HiveField(4)
   DateTime datetime;
   AddData(
-    this.IN,
-    this.amount,
-    this.datetime,
-    this.explain,
     this.name,
+    this.explain,
+    this.amount,
+    this.IN,
+    this.datetime,
   );
 }
