@@ -111,7 +111,7 @@ class _StatisticsOldState extends State<StatisticsOld> {
                   ),
                 ),
                 const SizedBox(height: 20),
-                const Chart(),
+                //  Chart(),
                 const SizedBox(height: 20),
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15),
