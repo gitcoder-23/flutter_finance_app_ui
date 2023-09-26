@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_finance_app_ui/data/listdata.dart';
 import 'package:flutter_finance_app_ui/data/models/add_data.dart';
+import 'package:flutter_finance_app_ui/data/utlity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class Home extends StatefulWidget {
@@ -269,10 +270,10 @@ class _HomeState extends State<Home> {
               color: const Color.fromARGB(255, 47, 125, 121),
               borderRadius: BorderRadius.circular(15),
             ),
-            child: const Column(
+            child: Column(
               children: [
-                SizedBox(height: 10),
-                Padding(
+                const SizedBox(height: 10),
+                const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -292,14 +293,14 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                 ),
-                SizedBox(height: 7),
+                const SizedBox(height: 7),
                 Padding(
-                  padding: EdgeInsets.only(left: 15),
+                  padding: const EdgeInsets.only(left: 15),
                   child: Row(
                     children: [
                       Text(
-                        '\$ 2,957',
-                        style: TextStyle(
+                        '\$ ${total()}',
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 25,
                           color: Colors.white,
@@ -308,8 +309,8 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                 ),
-                SizedBox(height: 25),
-                Padding(
+                const SizedBox(height: 25),
+                const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -361,22 +362,22 @@ class _HomeState extends State<Home> {
                     ],
                   ),
                 ),
-                SizedBox(height: 6),
+                const SizedBox(height: 6),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 30),
+                  padding: const EdgeInsets.symmetric(horizontal: 30),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        '\$ 1,450',
-                        style: TextStyle(
+                        '\$ ${income()}',
+                        style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
                             color: Colors.white),
                       ),
                       Text(
-                        '\$ 249',
-                        style: TextStyle(
+                        '\$ ${expenses()}',
+                        style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             fontSize: 16,
                             color: Colors.white),
